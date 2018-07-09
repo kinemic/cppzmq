@@ -20,7 +20,7 @@ if(NOT ZeroMQ_FOUND)
     message(FATAL_ERROR "ZeroMQ was not found, neither as a CMake package nor via pkg-config")
 endif()
 
-if (ZeroMQ_FOUND AND (NOT TARGET libzmq OR NOT TARGET libzmq-static))
+if (ZeroMQ_FOUND AND (NOT TARGET ZeroMQ::libzmq OR NOT TARGET ZeroMQ::libzmq-static))
   message(FATAL_ERROR "ZeroMQ version not supported!")
 endif()
 
@@ -49,8 +49,8 @@ foreach (target cppzmq cppzmq-static)
                                                  $<INSTALL_INTERFACE:include>)
 endforeach()
 
-target_link_libraries(cppzmq INTERFACE libzmq)
-target_link_libraries(cppzmq-static INTERFACE libzmq-static)
+target_link_libraries(cppzmq INTERFACE ZeroMQ::libzmq)
+target_link_libraries(cppzmq-static INTERFACE ZeroMQ::libzmq-static)
 
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
